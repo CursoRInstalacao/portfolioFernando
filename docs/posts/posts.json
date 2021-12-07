@@ -13,7 +13,24 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2021-12-06T21:41:15-03:00",
+    "last_modified": "2021-12-06T21:51:09-03:00",
     "input_file": {}
+  },
+  {
+    "path": "posts/2021-12-06-anlise-da-base-rais/",
+    "title": "Análise da base RAIS",
+    "description": "Essa análise teve como objetivo analisar os salários na base da RAIS. Esse projeto foi feito na Semana Data Science na Prática da Curso-R",
+    "author": [
+      {
+        "name": "Fernando Corrêa",
+        "url": {}
+      }
+    ],
+    "date": "2021-12-06",
+    "categories": [],
+    "contents": "\r\nEsse é o meu primeiro projeto no portfólio.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-12-06T21:56:34-03:00",
+    "input_file": "anlise-da-base-rais.knit.md"
   }
 ]

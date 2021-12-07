@@ -1,0 +1,20 @@
+---
+title: "Análise da base RAIS"
+description: |
+  Essa análise teve como objetivo analisar os salários na base da RAIS. Esse projeto foi feito na Semana Data Science na Prática da Curso-R
+author:
+  - name: Fernando Corrêa
+date: 2021-12-06
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Esse é o meu primeiro projeto no portfólio.
+
+
