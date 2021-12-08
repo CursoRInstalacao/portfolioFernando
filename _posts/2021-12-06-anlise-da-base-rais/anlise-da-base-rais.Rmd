@@ -1,7 +1,7 @@
 ---
-title: "Análise da base RAIS"
+title: "Estudando RMarkdown"
 description: |
-  Essa análise teve como objetivo analisar os salários na base da RAIS. Esse projeto foi feito na Semana Data Science na Prática da Curso-R
+  Aqui eu testei alguns rmarkdownzinhos
 author:
   - name: Fernando Corrêa
 date: 2021-12-06

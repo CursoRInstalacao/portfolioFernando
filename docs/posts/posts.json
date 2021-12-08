@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-12-07-analiseraisreal/",
+    "title": "Analisando dados da RAIS",
+    "description": "Essa análise teve como objetivo analisar os salários na base da RAIS. Esse projeto foi feito na Semana Data Science na Prática da Curso-R.",
+    "author": [
+      {
+        "name": "Nora Jones",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2021-12-07",
+    "categories": [],
+    "contents": "\r\nNesse relatório estamos interessados em responder a pergunta:\r\n“Quanto ganha um cientista de dados?”\r\nPara isso vamos utilizar a base da RAIS anonimizada\r\nAcessando os dados da RAIS\r\nVamos utilizar o datalake da iniciativa base dos dados.\r\n\r\n\r\n\r\nAbaixo está o código que carrega as primeiras 5 linhas da tabela de microdados.\r\n\r\n# A tibble: 5 x 66\r\n    ano sigla_uf id_municipio tipo_vinculo vinculo_ativo_3112\r\n  <int> <chr>    <chr>        <chr>                     <int>\r\n1  1985 AL       2700102      1                             0\r\n2  1985 AL       2700102      1                             1\r\n3  1985 AL       2700102      1                             1\r\n4  1985 AL       2700102      1                             1\r\n5  1985 AL       2700102      1                             1\r\n# ... with 61 more variables: tipo_admissao <chr>,\r\n#   mes_admissao <int>, mes_desligamento <int>,\r\n#   motivo_desligamento <chr>, causa_desligamento_1 <chr>,\r\n#   causa_desligamento_2 <chr>, causa_desligamento_3 <chr>,\r\n#   faixa_tempo_emprego <chr>, tempo_emprego <dbl>,\r\n#   faixa_horas_contratadas <chr>,\r\n#   quantidade_horas_contratadas <int>, ...\r\n\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-12-07T21:42:58-03:00",
+    "input_file": "analiseraisreal.knit.md"
+  },
+  {
     "path": "posts/welcome/",
     "title": "Welcome to Portfolio do Fernando",
     "description": "Welcome to our new blog, Portfolio do Fernando. We hope you enjoy \nreading what we have to say!",
