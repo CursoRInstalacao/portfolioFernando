@@ -1,7 +1,7 @@
 ---
 title: "Analisando dados da RAIS"
 description: |
- Essa análise teve como objetivo analisar os salários na base da RAIS. Esse projeto foi feito na Semana Data Science na Prática da Curso-R.
+  Essa análise teve como objetivo analisar os salários na base da RAIS. Esse projeto foi feito na Semana Data Science na Prática da Curso-R.
 author:
   - name: Nora Jones
     url: https://example.com/norajones
@@ -45,13 +45,15 @@ Abaixo está o código que carrega as primeiras 5 linhas da tabela de microdados
 
 # como eu faço se uso um SGDB (robô que processa e me envia dados)
 
-bigrquery::bq_auth("ezeloc2@gmail.com")
+bigrquery::bq_auth("jtrecenti@curso-r.com")
+
+# atalho: ctrl + enter
 
 conexao <- dbConnect(
   bigquery(),
   project = "basedosdados",
   dataset = "br_me_rais",
-  billing = "semana-dsp-outro-email"
+  billing = "curso-r"
 )
 
 primeiras_cinco_linhas <- collect(head(select(tbl(conexao, "microdados_vinculos"),
@@ -59,5 +61,125 @@ primeiras_cinco_linhas <- collect(head(select(tbl(conexao, "microdados_vinculos"
 
 primeiras_cinco_linhas
 
+```
+
+Vamos fazer a mesma coisa utilizando o pipe!
+
+```{r}
+
+primeiras_cinco_linhas_com_pipe <- tbl(conexao, "microdados_vinculos") %>% 
+  select(everything()) %>% 
+  head(5) %>% 
+  collect()
+
+# atalho: ctrl+shift+M
+# antes e atualmente: {magrittr}: %>%
+# atualmente (4.1 ou +): |>
+
+primeiras_cinco_linhas_com_pipe
+```
+
+
+A base de dados que queremos analisar aqui é a base de pessoas que (potencialmente) trabalham com ciência de dados. Existe um Código Brasileiro de Ocupações (CBO), que tem um cadastro de todas as ocupações formais no Brasil. Vamos pegar alguns códigos que são relacionados a ciência de dados e filtrar a base da RAIS para obter os dados dessas pessoas.
+
+Pergunta principal de pesquisa: 
+
+> Quem trabalha com ciência de dados ganha quanto?
+
+```{r}
+
+codigos_cbo <- c(
+  "252515", "252525", "211110",
+  # pesquisa/cientista
+  "211205", "211210","411035",
+  "211210", "131120","211215"
+  # ocupações estatísticas
+)
+
+microdados_tbl <- tbl(conexao, "microdados_vinculos") %>% 
+  select(everything()) %>% 
+  filter(
+    ano >= 2013,
+    cbo_2002 %in% codigos_cbo
+  ) %>% 
+  head(5000)
+
+
+tabela_microdados_vinculos <- collect(microdados_tbl)
+
+View(tabela_microdados_vinculos)
+```
+
+Agora vamos rodar com a base completa!
+
+```{r}
+microdados_tbl <- tbl(conexao, "microdados_vinculos") %>% 
+  select(everything()) %>% 
+  filter(
+    ano >= 2013,
+    cbo_2002 %in% codigos_cbo
+  )
+
+tabela_microdados_vinculos <- collect(microdados_tbl)
+
+```
+## Perguntas de pesquisa
+
+- Quanto ganha uma pessoa que trabalha com ciência de dados
+
+Perguntas mais específicas
+
+- Quanto o valor médio varia no tempo?
+- Quanto o valor médio varia regionalmente?
+- Quanto o valor médio varia por características das pessoas?
+    - Gênero
+    - Raça/cor
+    - Idade
+
+- [Desafio] Qual cargo tem a maior taxa de crescimento dentro daquele setor da economia (CNAE) proporcionalmente a municípios com mais pessoas empregadas naquela CBO
+
+
+
+Como variam os salários médios no tempo?
+
+```{r}
+
+library(ggplot2)
+
+### Comentários:
+## ctrl+shift+c
+
+tabela_medias <- tabela_microdados_vinculos %>% 
+  group_by(ano) %>% 
+  summarise(media_salario = mean(valor_remuneracao_media))
+
+## Funções do {dplyr} que vamos usar:
+
+# filter: filtra linhas
+# select: seleciona colunas
+# mutate: cria colunas
+# group_by + summarise: summariza a base
+# arrange: ordena a base
+
+ggplot(tabela_medias) +
+  aes(x = ano, y = media_salario) +
+  geom_col() +
+  scale_x_continuous(breaks = 2013:2019)
+
+
+```
+
+Agora vamos ver os números exatos:
+
+```{r}
+library(knitr)
+tabela_medias %>% 
+  kable()
+```
+
+```{r}
+readr::write_rds(tabela_microdados_vinculos,
+                 "tabela_microdados_vinculos.rds",
+                 compress = "xz")
 ```
 
