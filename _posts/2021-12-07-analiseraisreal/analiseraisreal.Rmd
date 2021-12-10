@@ -28,14 +28,14 @@ Vamos utilizar [o datalake da iniciativa base dos dados](https://basedosdados.or
 
 ```{r message=FALSE, warning=FALSE}
 
-library(bigrquery)
+#library(bigrquery)
 library(dplyr)
 
 ```
 
 Abaixo está o código que carrega as primeiras 5 linhas da tabela de microdados.
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = TRUE}
 
 # como eu faria se fosse ler de um arquivo
 
@@ -65,7 +65,7 @@ primeiras_cinco_linhas
 
 Vamos fazer a mesma coisa utilizando o pipe!
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = TRUE}
 
 primeiras_cinco_linhas_com_pipe <- tbl(conexao, "microdados_vinculos") %>% 
   select(everything()) %>% 
@@ -86,7 +86,7 @@ Pergunta principal de pesquisa:
 
 > Quem trabalha com ciência de dados ganha quanto?
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = TRUE}
 
 codigos_cbo <- c(
   "252515", "252525", "211110",
@@ -112,7 +112,7 @@ View(tabela_microdados_vinculos)
 
 Agora vamos rodar com a base completa!
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = TRUE}
 microdados_tbl <- tbl(conexao, "microdados_vinculos") %>% 
   select(everything()) %>% 
   filter(
@@ -306,6 +306,5 @@ ggplot(tabela_resumo_sexo_raca_cor,
        aes(x = raca_cor, y = media, fill = sexo)) +
   geom_col(position = 'dodge')
 ```
-
 
 
